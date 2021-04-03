@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="wallpaper">
+    <file>wallpaper-1.jpg</file>
+  </qresource>
+  <qresource prefix="logo">
+    <file>fcritlogo.png</file>
+    <file>tifr-logo.png</file>
+  </qresource>
+</RCC>

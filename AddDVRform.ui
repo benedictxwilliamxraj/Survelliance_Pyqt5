@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>591</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="14" column="2">
+      <widget class="QLineEdit" name="ch10"/>
+     </item>
+     <item row="16" column="0">
+      <widget class="QLabel" name="label_ch12">
+       <property name="text">
+        <string>Channel 12</string>
+       </property>
+      </widget>
+     </item>
+     <item row="21" column="0">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="12" column="2">
+      <widget class="QLineEdit" name="ch8"/>
+     </item>
+     <item row="8" column="2">
+      <widget class="QLineEdit" name="ch4"/>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_ch3">
+       <property name="text">
+        <string>Channel 3</string>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="2">
+      <widget class="QLineEdit" name="ch9"/>
+     </item>
+     <item row="17" column="2">
+      <widget class="QLineEdit" name="ch13"/>
+     </item>
+     <item row="7" column="2">
+      <widget class="QLineEdit" name="ch3"/>
+     </item>
+     <item row="14" column="0">
+      <widget class="QLabel" name="label_ch10">
+       <property name="text">
+        <string>Channel 10</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_ch4">
+       <property name="text">
+        <string>Channel 4</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="2">
+      <widget class="QLineEdit" name="ch7"/>
+     </item>
+     <item row="19" column="2">
+      <widget class="QLineEdit" name="ch15"/>
+     </item>
+     <item row="20" column="0">
+      <widget class="QLabel" name="label_ch16">
+       <property name="text">
+        <string>Channel 16</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_ch1">
+       <property name="text">
+        <string>Channel 1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QLineEdit" name="ch1"/>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLineEdit" name="DVRname"/>
+     </item>
+     <item row="15" column="0">
+      <widget class="QLabel" name="label_ch11">
+       <property name="text">
+        <string>Channel 11</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="label_ch5">
+       <property name="text">
+        <string>Channel 5</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="label_ch7">
+       <property name="text">
+        <string>Channel 7</string>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="0">
+      <widget class="QLabel" name="label_ch9">
+       <property name="text">
+        <string>Channel 9</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="2">
+      <widget class="QLineEdit" name="ch6"/>
+     </item>
+     <item row="12" column="0">
+      <widget class="QLabel" name="label_ch8">
+       <property name="text">
+        <string>Channel 8</string>
+       </property>
+      </widget>
+     </item>
+     <item row="20" column="2">
+      <widget class="QLineEdit" name="ch16"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>DVR Name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLineEdit" name="ch0"/>
+     </item>
+     <item row="17" column="0">
+      <widget class="QLabel" name="label_ch13">
+       <property name="text">
+        <string>Channel 13</string>
+       </property>
+      </widget>
+     </item>
+     <item row="18" column="2">
+      <widget class="QLineEdit" name="ch14"/>
+     </item>
+     <item row="30" column="0" colspan="3">
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+     <item row="18" column="0">
+      <widget class="QLabel" name="label_ch14">
+       <property name="text">
+        <string>Channel 14</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="QLineEdit" name="ch2"/>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="label_ch6">
+       <property name="text">
+        <string>Channel 6</string>
+       </property>
+      </widget>
+     </item>
+     <item row="16" column="2">
+      <widget class="QLineEdit" name="ch12"/>
+     </item>
+     <item row="5" column="0" rowspan="2">
+      <widget class="QLabel" name="label_ch2">
+       <property name="text">
+        <string>Channel 2</string>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="2">
+      <widget class="QLineEdit" name="ch11"/>
+     </item>
+     <item row="9" column="2">
+      <widget class="QLineEdit" name="ch5"/>
+     </item>
+     <item row="19" column="0">
+      <widget class="QLabel" name="label_ch15">
+       <property name="text">
+        <string>Channel 15</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_ch0">
+       <property name="text">
+        <string>Channel 0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="image.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Dialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
