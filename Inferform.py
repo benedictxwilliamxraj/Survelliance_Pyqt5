@@ -53,7 +53,7 @@ class Infer_Dialog(object):
     def SubmitInfer(self):
         self.sttime = self.startime.text()
         self.etime = self.endtime.text()
-        f = open(data/infertime.txt)
+        f = open("data/infertime.txt",'w')
         f.write(self.sttime)
         f.write('-')
         f.write(self.etime)
@@ -61,12 +61,12 @@ class Infer_Dialog(object):
 
 import image_rc
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     Dialog = QtWidgets.QDialog()
+#     ui = Infer_Dialog()
+#     ui.setupUi(Dialog)
+#     Dialog.show()
+#     sys.exit(app.exec_())
 
