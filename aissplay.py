@@ -11,6 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, QThread
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QWidget,QLabel, QMessageBox, QVBoxLayout
+from PyQt5.QtCore import QTimer, QTime, QDateTime
 import qtmodern.styles
 import qtmodern.windows
 import numpy as np
@@ -19,6 +20,7 @@ import os
 import time
 import  json
 import image_rc
+import emailreceipt
 import adddvr
 import Inferform
 
@@ -30,6 +32,10 @@ class Ui_MainWindow(QWidget):
 
         self.filename = None
         self.isplaying = True
+        self.timer = QTimer( self )
+        self.timer.timeout.connect( self.showtime )
+        self.timer.start( 1000 )
+
         # self.restore(self.settings)
 
 
@@ -37,29 +43,40 @@ class Ui_MainWindow(QWidget):
     def setupUi(self, MainWindow):
         self.setMouseTracking(True)
 
-
-
-
-
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(911, 598)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout.setObjectName("gridLayout")
-        self.Screenframe = QtWidgets.QFrame(self.centralwidget)
-        self.Screenframe.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.Screenframe.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.Screenframe.setObjectName("Screenframe")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.Screenframe)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        self.Screenlabel = QtWidgets.QLabel(self.Screenframe)
-        self.Screenlabel.setStyleSheet("background-color: rgb(0, 0, 0);")
-        self.Screenlabel.setObjectName("Screenlabel")
-        self.gridLayout_2.addWidget(self.Screenlabel, 0, 0, 1, 1)
-        self.gridLayout.addWidget(self.Screenframe, 0, 0, 1, 1)
+        MainWindow.setObjectName( "MainWindow" )
+        MainWindow.resize( 911, 598 )
+        self.centralwidget = QtWidgets.QWidget( MainWindow )
+        self.centralwidget.setObjectName( "centralwidget" )
+        self.gridLayout = QtWidgets.QGridLayout( self.centralwidget )
+        self.gridLayout.setObjectName( "gridLayout" )
+        self.Screenframe = QtWidgets.QFrame( self.centralwidget )
+        self.Screenframe.setFrameShape( QtWidgets.QFrame.StyledPanel )
+        self.Screenframe.setFrameShadow( QtWidgets.QFrame.Raised )
+        self.Screenframe.setObjectName( "Screenframe" )
+        self.gridLayout_2 = QtWidgets.QGridLayout( self.Screenframe )
+        self.gridLayout_2.setObjectName( "gridLayout_2" )
+        self.Screenlabel = QtWidgets.QLabel( self.Screenframe )
+        self.Screenlabel.setStyleSheet( "background-color: rgb(0, 0, 0);" )
+        self.Screenlabel.setObjectName( "Screenlabel" )
+        self.gridLayout_2.addWidget( self.Screenlabel, 1, 0, 2, 2 )
+        self.CurrDVRName = QtWidgets.QLabel( self.Screenframe )
+        self.CurrDVRName.setMaximumSize( QtCore.QSize( 250, 20 ) )
+        font = QtGui.QFont()
+        font.setPointSize( 13 )
+        self.CurrDVRName.setFont( font )
+        self.CurrDVRName.setStyleSheet( "background-color: rgb(255, 255, 127);" )
+        self.CurrDVRName.setObjectName( "CurrDVRName" )
+        self.gridLayout_2.addWidget( self.CurrDVRName, 0, 0, 1, 1 )
+        self.Timelabel = QtWidgets.QLabel( self.Screenframe )
+        font = QtGui.QFont()
+        font.setPointSize( 10 )
+        self.Timelabel.setFont( font )
+        self.Timelabel.setStyleSheet( "background-color: rgb(255, 255, 127);" )
+        self.Timelabel.setObjectName( "Timelabel" )
+        self.gridLayout_2.addWidget( self.Timelabel, 0, 1, 1, 1 )
+        self.gridLayout.addWidget( self.Screenframe, 0, 0, 1, 1 )
+        MainWindow.setCentralWidget( self.centralwidget )
         self.Screenframe.hide()
-        MainWindow.setCentralWidget(self.centralwidget)
 
         ####Login Frame
         self.Loginframe = QtWidgets.QFrame( self.centralwidget )
@@ -138,12 +155,15 @@ class Ui_MainWindow(QWidget):
         self.actionAdd_DVR.setObjectName("actionAdd_DVR")
         self.actionInfertime = QtWidgets.QAction( MainWindow )
         self.actionInfertime.setObjectName( "actionInfertime" )
+        self.actionemailreceipt = QtWidgets.QAction( MainWindow )
+        self.actionemailreceipt.setObjectName( "actionemailreceipt" )
         self.actionCentral_Library = QtWidgets.QAction(MainWindow)
         self.actionCentral_Library.setObjectName("actionCentral_Library")
         self.actionLogout = QtWidgets.QAction(MainWindow)
         self.actionLogout.setObjectName("actionLogout")
         self.menuMenu.addAction(self.actionAdd_DVR)
         self.menuMenu.addAction(self.actionInfertime)
+        self.menuMenu.addAction( self.actionemailreceipt )
         self.menuMenu.addSeparator()
         self.menuMenu.addAction(self.actionLogout)
         self.menuDVR.addAction(self.actionCentral_Library)
@@ -160,7 +180,7 @@ class Ui_MainWindow(QWidget):
             self.dvrdropdown = self.menuDVR.addAction(self.key_hold[i])
             self.handletrigger(self.key_hold[i], self.dvrdropdown)
 
-
+        self.setWindowTitle( "AISS-" + "22" )
 
         ##  All Connections
         clickable( self.Screenlabel ).connect( self.FullScreenS )
@@ -168,7 +188,8 @@ class Ui_MainWindow(QWidget):
         self.actionLogout.triggered.connect( lambda: self.onLogout() )
         self.actionCentral_Library.triggered.connect(lambda : self.LiveStream("CentralLibrary"))
         self.actionAdd_DVR.triggered.connect(lambda : self.addDVRForm())
-        self.actionInfertime.triggered.connect(lambda : self.Infertime())
+        self.actionInfertime.triggered.connect(lambda: self.Infertime())
+        self.actionemailreceipt.triggered.connect(lambda: self.Receipt())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -176,13 +197,15 @@ class Ui_MainWindow(QWidget):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "AISS"))
-        self.Screenlabel.setText(_translate("MainWindow", ""))
+        self.Screenlabel.setText(_translate("MainWindow", "Central Lib"))
         self.menuMenu.setTitle(_translate("MainWindow", "Menu"))
         self.menuDVR.setTitle(_translate("MainWindow", "DVR"))
         self.actionAdd_DVR.setText(_translate("MainWindow", "Add DVR"))
         self.actionCentral_Library.setText(_translate("MainWindow", "Central Library"))
         self.actionLogout.setText(_translate("MainWindow", "Logout"))
         self.actionInfertime.setText(_translate("MainWindow","Inference Time"))
+        self.actionemailreceipt.setText( _translate( "MainWindow", "Recipient" ) )
+        self.CurrDVRName.setText( _translate( "MainWindow", "DVR" ) )
 
         ##LOGIN PANEL
         self.LoginLabel.setText( _translate( "MainWindow", "LOGIN" ) )
@@ -192,12 +215,19 @@ class Ui_MainWindow(QWidget):
         self.LoginLabel_2.setText( _translate("MainWindow", "AI Surveillance System" ))
 
 
+
+
     def handletrigger(self,key,action):
-        action.triggered.connect(lambda: self.LiveStream(key) )
+        action.triggered.connect(lambda: self.LiveStream(key))
 
 
-    def showtext(self):
-        print("done")
+    def showtime(self):
+        self.curr_datetime = QDateTime.currentDateTime()
+        self.label_time = self.curr_datetime.toString( 'dd/MM/yyyy hh:mm:ss' )
+        self.Timelabel.setText(self.label_time)
+
+        # print(self.curr_datetime)
+
 
 
     def addDVRMenu(self):
@@ -235,6 +265,15 @@ class Ui_MainWindow(QWidget):
         if res == QtWidgets.QDialog.Accepted:
             ui.SubmitInfer()
 
+    def Receipt(self):
+        Dialog = QtWidgets.QDialog()
+        ui = emailreceipt.Emaillist_Dialog()
+        ui.setupUi( Dialog )
+        Dialog.show()
+        Dialog.exec_()
+
+
+
 
 
     def onLogin(self):
@@ -266,6 +305,9 @@ class Ui_MainWindow(QWidget):
             self.thread = VideoThread( self.streamlink, self.isplaying )
             self.thread.change_pixmap_signal.connect( self.update_image )
             self.thread.start()
+
+            self.CurrDVRName.setText(key)
+
 
         except Exception as e:
             print( e )

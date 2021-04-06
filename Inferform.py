@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import datetime
 
 class Infer_Dialog(object):
     def setupUi(self, Dialog):
@@ -50,7 +51,7 @@ class Infer_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Infer Time"))
         self.Endlabel.setText(_translate("Dialog", "End Time"))
         self.Startlab.setText(_translate("Dialog", "Start Time"))
         self.Alltime.setText(_translate("Dialog", "ALL time"))
@@ -65,10 +66,16 @@ class Infer_Dialog(object):
             f.write('0000')
             f.close()
         else:
+            self.st = datetime.datetime.strptime(self.stdatetime.text(), "%d/%m/%Y  %H:%M")
+            self.st = datetime.datetime.timestamp( self.st )
+            print(self.st)
+            self.ed = datetime.datetime.strptime( self.stdatetime.text(), "%d/%m/%Y  %H:%M" )
+            self.ed = datetime.datetime.timestamp( self.ed )
+
             f = open('data/infertime.txt','w')
-            f.write(self.stdatetime.text())
+            f.write(self.st)
             f.write('-')
-            f.write(self.enddttime.text())
+            f.write(self.ed)
             f.close()
 
 import image_rc
